@@ -1,0 +1,5 @@
+.idea/
+.target/
+*.log
+# ===== Selenium configs =====
+src/test/resources/config.properties
