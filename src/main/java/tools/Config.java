@@ -2,9 +2,7 @@
 * Класс, который подкладывает переменные из конфигов
 * Удобно поменять в одном файле, чтобы запускать тесты
 * */
-
 package tools;
-
 
 import java.io.IOException;
 import java.io.InputStream;
