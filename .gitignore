@@ -2,4 +2,4 @@
 target/
 *.log
 # ===== Selenium configs =====
-config.properties
+src/test/resources/config.properties
