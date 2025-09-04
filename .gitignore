@@ -1,5 +1,5 @@
-.idea/
-.target/
+idea/
+target/
 *.log
 # ===== Selenium configs =====
-src/test/resources/config.properties
+src/test/resources/config.properties/
