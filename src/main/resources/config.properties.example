@@ -3,3 +3,5 @@ base.url=https://wishlist.otus.kartushin.su/
 user.login=
 user.password=
 timeout=10
+headless=false
+fullscreen=true
