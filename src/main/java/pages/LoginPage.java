@@ -1,3 +1,7 @@
+/**
+ * Описаны кнопки и медоды для авторизации
+ * @author Григорьев Н.
+ */
 package pages;
 
 import org.openqa.selenium.WebDriver;
@@ -6,7 +10,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import tools.Config;
 
-import static java.lang.System.getProperty;
 
 public class LoginPage extends AbsPage{
   @FindBy(xpath = "//input[@type='text']")
@@ -18,12 +21,13 @@ public class LoginPage extends AbsPage{
   @FindBy(xpath = "//button[@type='submit']")
   private WebElement entryButton;
 
+  /** Инициализация полей, помеченных @FindBy с помощью PageFactory.
+   *  Включает их поиск*/
   public LoginPage(WebDriver driver){
     super(driver);
-    /*Инициализация полей, помеченных @FindBy с помощью PageFactory
-    * Включает их поиск*/
     PageFactory.initElements(driver, this);
   }
+
   public void enterUsername(){
     loginField.sendKeys(Config.get("user.login"));
   }
