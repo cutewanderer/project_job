@@ -37,4 +37,13 @@ public class LoginPage extends AbsPage{
   public void login(){
     entryButton.click();
   }
+
+  /**
+   * Логин без дублирования кода
+   */
+  public void loginAsDefaultUser() {
+    enterUsername();
+    enterPass();
+    login();
+  }
 }

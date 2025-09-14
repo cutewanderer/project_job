@@ -2,8 +2,12 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import utils.ResponseChecker;
 
 public class WishlistPage extends AbsPage{
+  private final ResponseChecker responseChecker = new ResponseChecker();
+
   public WishlistPage(WebDriver driver) {
     super(driver);
   }
@@ -42,7 +46,12 @@ public class WishlistPage extends AbsPage{
   /**
    * Кнопка резервирования подарка
    */
-  private final By reservedButton = By.xpath("//button[@type='button' and @class='btn btn-primary']");
+  private final By reservedButton = By.xpath("//div[contains(@class, 'card') and .//div[contains(@class,'card-title') " +
+          "and text()='sdevgvrrth3436546']]//button[text()='Зарезервировать']");
+  /**
+   * Кнопка снятия резерва с подарка
+   */
+  public final By unReservedButton = By.xpath("//div[contains(@class, 'card') and .//div[contains(@class,'card-title') and text()='sdevgvrrth3436546']]//button[text()='Снять резерв']");
   /**
    * Кнопка перехода на сайт магазина подарка
    */
@@ -63,17 +72,17 @@ public class WishlistPage extends AbsPage{
   /**
    * Ввод названия списка
    */
-  public void inputNameList(){
-    driver.findElement(inputNameList).sendKeys();
+  public void inputNameList(String title){
+    driver.findElement(inputNameList).sendKeys(title);
   }
   /**
    * Ввод описания списка
    */
-  public void inputDescriptionList(){
-    driver.findElement(inputDescription).sendKeys();
+  public void inputDescriptionList(String description){
+    driver.findElement(inputDescription).sendKeys(description);
   }
   /**
-   * нажимаем на кнопку Создать список
+   * Нажимаем на кнопку создать список
    */
   public void submitList(){
     driver.findElement(createList).click();
@@ -107,5 +116,21 @@ public class WishlistPage extends AbsPage{
    */
   public void clickStoreUrlGift(){
     driver.findElement(storeButtonGift).click();
+  }
+  /**
+   * Метод разрезервирования подарка
+   */
+  public void clickUnreservedGift() {
+    driver.findElement(unReservedButton).click();
+  }
+  /**
+   * Метод проверки перехода на поле ввода названия листа
+   */
+  public boolean fieldNameSelected(){
+    WebElement selectedNameField = driver.switchTo().activeElement();
+    return selectedNameField.equals(driver.findElement(inputNameList));
+  }
+  public boolean modalCreateLogoDisplayed(){
+    return driver.findElements(logoCreateNewList).isEmpty();
   }
 }
