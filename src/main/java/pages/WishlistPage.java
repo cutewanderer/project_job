@@ -130,7 +130,20 @@ public class WishlistPage extends AbsPage{
     WebElement selectedNameField = driver.switchTo().activeElement();
     return selectedNameField.equals(driver.findElement(inputNameList));
   }
+
+  /**
+   * Метод, который отображает, что логотип модалки не отображается при его поиске
+   * @return
+   */
   public boolean modalCreateLogoDisplayed(){
     return driver.findElements(logoCreateNewList).isEmpty();
+  }
+  /**
+   * Метод, который проверяет что поле Название заполнено
+   */
+  public boolean fieldNameWishlistNotEmpty(){
+    WebElement name = driver.findElement(inputNameList);
+    String value = name.getAttribute("value");
+    return value != null && !value.trim().isEmpty();
   }
 }

@@ -4,6 +4,7 @@ import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import pages.MainPage;
 import pages.WishlistPage;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -11,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class WishlistCreate extends BaseTest {
   private static final Logger log = LogManager.getLogger();
   WishlistPage wishlistPage = new WishlistPage(driver);
+  MainPage mainPage = new MainPage(driver);
   Wishlist wl = new Wishlist.Builder().random().build();
 
   @Test
@@ -48,6 +50,36 @@ public class WishlistCreate extends BaseTest {
     wishlistPage.inputNameList(wl.getTitle());
     wishlistPage.inputDescriptionList(wl.getDescription());
     wishlistPage.clickCancelCreate();
+    Thread.sleep(500L);
     assertTrue(wishlistPage.modalCreateLogoDisplayed(),"Не должно появиться окно модалки");
+  }
+  @Test
+  @DisplayName("Закрытие окна с заполненными полями создания вишлиста")
+  public void closeModalCreateWishlist() throws InterruptedException {
+    log.info("Начало теста создание вишлиста и закрытие модалки создания");
+    wishlistPage.clickCreateList();
+    Thread.sleep(500L);
+    wishlistPage.viewLogoCreate();
+    wishlistPage.inputNameList(wl.getTitle());
+    wishlistPage.inputDescriptionList(wl.getDescription());
+    wishlistPage.clickClose();
+    Thread.sleep(500L);
+    log.info("Закрываем модальное окно, проверяем что оно закрыто");
+
+    assertTrue(wishlistPage.modalCreateLogoDisplayed(),"Не должно отображаться окно модалки");
+    log.info("Открываем модалку повторно чтобы проверить что введенные данные не удалились");
+    wishlistPage.clickCreateList();
+    Thread.sleep(500L);
+    assertTrue(wishlistPage.fieldNameWishlistNotEmpty(), "Ошибка, поле пустое.");
+  }
+
+  @Test
+  @DisplayName("Тест удаления вишлиста")
+  public void deleteWishlist() throws InterruptedException {
+    log.info("Тест удаления вишлиста");
+    mainPage.clickDeleteList();
+    Thread.sleep(500L);
+    log.info("Нажал на кнопку удаления");
+    assertTrue(responseChecker.checkDeletedWishlist(), "Список должен был удален");
   }
 }

@@ -21,7 +21,8 @@ public class MainPage extends AbsPage {
   /**
    * Кнопка удаления списка подарков по ID
    */
-  private final By deleteList = By.xpath("//a[@href='/wishlists/59529636-f0f6-4615-931b-f408da8861a5']/../button");
+  private final By deleteList = By.xpath("//div[@class='card-body']" +
+          "[.//div[@class='card-title h5' and contains(text(),'Wishlist')]]//button[contains(@class,'btn-danger')]");
 
   /**
   * Поиск элемента для проверки

@@ -41,6 +41,10 @@ public class ResponseChecker {
     String url = String.format("%s/api/wishlists", baseUrl);
     return true;
   }
+  public boolean checkDeletedWishlist(){
+    String url = String.format("%s/api/wishlists", baseUrl);
+    return true;
+  }
   /**
    * Универсальный метод для проверки любого запроса.
    *

@@ -6,6 +6,7 @@ import pages.LoginPage;
 import tools.Config;
 import utils.ResponseChecker;
 
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 public abstract class BaseTest {
@@ -20,10 +21,7 @@ public abstract class BaseTest {
     responseChecker = new ResponseChecker();
 
     driver.get(Config.get("base.url"));
-    driver.manage().timeouts().implicitlyWait(
-            Long.parseLong(Config.get("timeout")),
-            TimeUnit.SECONDS
-    );
+    driver.manage().timeouts().implicitlyWait((Duration.ofSeconds(5)));
 
     new LoginPage(driver).loginAsDefaultUser();
   }
